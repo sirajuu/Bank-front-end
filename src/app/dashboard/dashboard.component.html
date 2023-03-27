@@ -1,0 +1,180 @@
+<div class="hi">
+  <div *ngIf="!deleteConfirmStatus">
+    <nav *ngIf="!logoutStatus" class="navbar navbar-expand-lg bg-body-tertiary ">
+      <div class="container-fluid ">
+        <a class="navbar-brand" href="#">Bank</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end  " id="navbarSupportedContent">
+          <ul class="navbar-nav me-5 ">
+
+            <li class="nav-item dropdown ">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Services
+              </a>
+              <ul class="dropdown-menu">
+                <li><a (click)="getBalance()" class="dropdown-item" data-bs-toggle="offcanvas"
+                    href="#offcanvasExample">Balance
+                    Enquiry</a></li>
+                <li><a class="dropdown-item btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Fund
+                    transfer</a>
+                </li>
+                <li><a class="dropdown-item" routerLink="/transactions">Mini Statement</a></li>
+
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a (click)="deleteMyAccount()" class="dropdown-item btn"><i class="fa-solid fa-trash"></i>Account</a></li>
+                <li><a (click)="logout()" class="dropdown-item btn"><i class="fa-solid fa-arrow-right-from-bracket"></i>LogOut</a></li>
+
+              </ul>
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </div>
+  <!-- deleteMsg design -->
+  <div  *ngIf="deleteMsg"  class=" containerd-flex justify-content-evenly rounded text-center text-dark bg-light">
+    <h3><img width="100px" src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif" alt="deleteacno"> {{deleteMsg}}</h3>
+  </div>
+
+
+  <!-- logout design -->
+  <div  *ngIf="logoutStatus"  class=" containerd-flex justify-content-evenly rounded text-center text-dark bg-light">
+    <h3><img width="100px" src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif" alt="logout"> Login
+      Out...</h3>
+  </div>
+
+
+  <!-- delete-confirm child selector -->
+  <app-delete-confirm (onDelete)="deleteFromChild($event)" (onCancel)="cancelDeleteConfirm()" [acno]="deleteAcno"></app-delete-confirm>
+
+
+  <!-- dashboard design -->
+  <div *ngIf="!deleteConfirmStatus" class="container">
+    <div *ngIf="!logoutStatus" class="row">
+      <div class="col-md-4 text-light">
+        <!-- content -->
+        <h1 style="margin-top: 100px;">Welcome {{currentUser}}</h1>
+        <label class="mt-2" style="text-align: justify;">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+          Vero quaerat vel dicta fugit
+          ab eveniet! Quos libero sunt vitae impedit atque suscipit? Eligendi, molestias aperiam delectus tenetur
+          soluta ullam aliquid!</label>
+        <!-- collapse bootstrap -->
+        <div class="collapse" id="collapseExample">
+          <div>
+            Some placeholder content for the collapse component. This panel is hidden by default but revealed
+            when the user activates the relevant trigger.
+          </div>
+        </div>
+
+        <button (click)="collapse()" class="btn btn-primary" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseExample">Read <span *ngIf="isCollapse">More</span>
+          <span *ngIf="!isCollapse">Less</span>
+        </button>
+      </div>
+      <div class="col-md-8">
+        <!-- img -->
+        <img width="800px" class="img-fluid m-4 rounded mt-5"
+          src="https://www.commbox.io/wp-content/uploads/2020/04/304-1.jpg" alt="">
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- balance enquiry offcanvas -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Balance Enquiry</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="text-center">
+        <img width="100px"
+          src="data:image/png;base64,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"
+          alt="">
+      </div>
+      <div>
+        <h5>Welcome {{currentUser}}</h5>
+        <label>Your current Account Balance is <b class="text-danger">Rs.{{userBalance}}</b></label>
+      </div>
+      <div>
+        <!-- Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists,
+            etc. -->
+      </div>
+      <div class="dropdown mt-3">
+        <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          Dropdown button
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- fund transfermodel -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Fund Transfer Form</h1>
+          <button (click)="resetForm()" type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="fundTransferForm">
+            <div class="form-outline flex-fill mb-0">
+              <input name="creditAcno" formControlName="creditAcno" type="text" id="form3Example1c"
+                class="form-control" />
+              <label class="form-label" for="form3Example1c">Credit Account Number</label>
+            </div>
+
+
+            <!-- invalid creditaccount number -->
+            <div
+              *ngIf="this.fundTransferForm.get('creditAcno')?.errors && this.fundTransferForm.get('creditAcno')?.touched"
+              class="text-danger mb-2 ms-5">Invalid Credit Account Number</div>
+
+            <div class="form-outline flex-fill mb-0">
+              <input name="amount" formControlName="amount" type="text" class="form-control" />
+              <label class="form-label" for="form3Example1c">Amount</label>
+            </div>
+
+            <!-- invalid amount -->
+            <div *ngIf="this.fundTransferForm.get('amount')?.errors && this.fundTransferForm.get('amount')?.touched"
+              class="text-danger mb-2 ms-5">Invalid Amount</div>
+
+            <div class="form-outline flex-fill mb-0">
+              <input name="password" formControlName="password" type="password" class="form-control" />
+              <label class="form-label" for="form3Example1c">Profile Password</label>
+            </div>
+            <!-- invalid profile password -->
+            <div *ngIf="this.fundTransferForm.get('password')?.errors && this.fundTransferForm.get('password')?.touched"
+              class="text-danger mb-2 ms-5">Invalid Profile Password</div>
+          </form>
+        </div>
+        <!--fundTransferSuccessMsg  -->
+        <div class="text-success fw-bolder fs-3">{{fundTransferSuccessMsg}}</div>
+        <!--fundTransferErrorMsg -->
+        <div class="text-danger fw-bolder fs-3">{{fundTransferErrorMsg}}</div>
+
+        <div class="modal-footer">
+          <button (click)="transfer()" type="submit" class="btn btn-primary">Transfer Now</button>
+          <button type="button" (click)="resetForm()" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

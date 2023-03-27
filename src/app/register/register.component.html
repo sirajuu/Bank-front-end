@@ -1,0 +1,108 @@
+
+<div *ngIf="registerStatus" class="container mt-5 text-center text-danger" style="margin-top: 400px;">
+  <h3>Your data's are getting registered... <br> please wait  </h3>
+</div>
+<section *ngIf="!registerStatus" class="vh-100" style="background-color: black;">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+
+            <div class="row justify-content-center">
+              <div class="col-md-5  d-flex align-items-center ">
+
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid" alt="Sample image">
+              </div>
+
+
+              <div class="col-md-7  order-2 order-lg-1">
+
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                <form [formGroup]="registerForm" (ngSubmit)="register()">
+                  <!-- user name -->
+                  <div class="d-flex flex-row align-items-center ">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input name="username" formControlName="username" type="text" id="form3Example1c"
+                        class="form-control" />
+                      <label class="form-label" for="form3Example1c">User Name</label>
+                    </div>
+                  </div>
+
+                  <!-- invalid username -->
+                  <div *ngIf="this.registerForm.get('username')?.errors && this.registerForm.get('username')?.touched"
+                    class="text-danger mb-2 ms-5">Invalid Username</div>
+
+                  <!-- <div class="d-flex flex-row align-items-center">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="email" id="form3Example3c" class="form-control" />
+                        <label class="form-label" for="form3Example3c">Your Email</label>
+                      </div>
+                    </div> -->
+
+                  <div class="d-flex flex-row align-items-center ">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input name="acno" formControlName="acno" type="acno" id="form3Example4c" class="form-control" />
+                      <label class="form-label" for="form3Example4c">Account Number</label>
+                    </div>
+                  </div>
+                   <!-- invalid account number -->
+                  <div *ngIf="this.registerForm.get('acno')?.errors && this.registerForm.get('acno')?.touched"
+                  class="text-danger mb-2 ms-5">Invalid Account Number</div>
+
+                  <div class="d-flex flex-row align-items-center">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input name="password" formControlName="password" type="password" id="form3Example4cd"
+                        class="form-control" />
+                      <label class="form-label" for="form3Example4cd">Password</label>
+                    </div>
+                  </div>
+                <!-- invalid password -->
+                  <div *ngIf="this.registerForm.get('password')?.errors && this.registerForm.get('password')?.touched"
+                  class="text-danger mb-2 ms-5">Invalid Password</div>
+
+
+                  <div class="d-flex flex-row align-items-center">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-">
+                      <input name="cpassword" formControlName="cpassword" type="password" id="form3Example4cd"
+                        class="form-control" />
+                      <label class="form-label" for="form3Example4cd">Confirm Password</label>
+                    </div>
+                  </div>
+
+
+                  <!--  invalid confirm password -->
+                  <div *ngIf=" this.registerForm.value.password!= this.registerForm.value.cpassword && this.registerForm.get('password')?.touched &&  this.registerForm.get('cpassword')?.touched"
+                  class="text-danger mb-2 ms-5">Password doesnot match</div>
+
+
+
+                  
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button  type="submit" class="btn btn-primary btn-lg">Register</button>
+                  </div>
+
+                  <div class="form-check d-flex justify-content-center ">
+                    <p>Already a user?Click here to<a routerLink="/">Login</a></p>
+
+                  </div>
+
+                </form>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

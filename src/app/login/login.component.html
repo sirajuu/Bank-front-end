@@ -1,0 +1,40 @@
+<!-- <app-navbar></app-navbar> -->
+<div class="wrapper">
+        <div class="logo">
+            <img src="https://c8.alamy.com/comp/2F1M9RM/bank-icon-designed-with-drawing-style-on-a-blackboard-animated-footage-ideal-for-compositing-and-motiongrafics-2F1M9RM.jpg" alt="">
+        </div>
+        <div class="text-center mt-4 name">
+           Bank
+        </div>
+        <form [formGroup]="loginForm" class="p-3 mt-3" (ngSubmit)="login()">
+            <div class="form-field d-flex align-items-center">
+                <!-- <span class="far fa-user"></span> -->
+                <input name="acno" formControlName="acno" type="text" name="userName" id="userName" placeholder="Account Number">
+            </div>
+             <!-- invalid account number -->
+             <div *ngIf="this.loginForm.get('acno')?.errors && this.loginForm.get('acno')?.touched"
+             class="text-danger mb-2 ms-5">Invalid Account Number</div>
+
+            <div class="form-field d-flex align-items-center">
+                <!-- <span class="fas fa-key"></span> -->
+                <input  name="password" formControlName="password"   type="password" name="password" id="pwd" placeholder="Password">
+            </div>
+            <div *ngIf="this.loginForm.get('password')?.errors && this.loginForm.get('password')?.touched"
+            class="text-danger mb-2 ms-5">Invalid Password</div>
+
+            <div class="text-danger mb-2">
+                {{errormsg}}
+            </div>
+
+            <button  type="submit" class="btn mt-3">Login
+                <!-- bootstrap spinner -->
+                <div *ngIf="successMsg" class="spinner-border text-light" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+            </button>
+        </form>
+        <div class="text-center fs-6">
+            <!-- <a href="#">Forget password?</a> or <a href="#">Sign up</a> -->
+          <p>New users? <a routerLink="register">Register</a></p>
+        </div>
+    </div>

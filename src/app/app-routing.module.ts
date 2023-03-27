@@ -1,7 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { RegisterComponent } from './register/register.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path:"", component:LoginComponent
+  },
+  {
+    path:"register", component:RegisterComponent
+  },
+  {
+    path:"dashboard", component:DashboardComponent
+  },
+  {
+    path:"transactions", component:TransactionsComponent
+  },
+  {
+    path:"**", component:PageNotFoundComponent
+  },
+  {
+    path:"navbar", component:NavbarComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
